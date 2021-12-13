@@ -7,7 +7,10 @@
   "scripts": {
     "prepare": "husky install",
     "commit": "git-cz",
-    "release": "semantic-release --no-ci"
+    "release": "semantic-release --no-ci",
+    "pretest": "cross-env NODE_ENV=test yarn sequelize db:migrate",
+    "test": "cross-env NODE_ENV=test jest",
+    "posttest": "cross-env NODE_ENV=test yarn sequelize db:migrate:undo:all"
   },
   "repository": {
     "type": "git",
@@ -19,6 +22,7 @@
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "commitizen": "^4.2.4",
+    "cross-env": "^7.0.3",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.4.1",
     "eslint-config-airbnb-base": "^15.0.0",
