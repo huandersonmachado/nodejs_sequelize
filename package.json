@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "release": "semantic-release --no-ci"
   },
   "repository": {
     "type": "git",
