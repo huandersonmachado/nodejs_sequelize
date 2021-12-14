@@ -10,7 +10,8 @@
     "release": "semantic-release --no-ci",
     "pretest": "cross-env NODE_ENV=test yarn sequelize db:migrate",
     "test": "cross-env NODE_ENV=test jest",
-    "posttest": "cross-env NODE_ENV=test yarn sequelize db:migrate:undo:all"
+    "posttest": "cross-env NODE_ENV=test yarn sequelize db:migrate:undo:all",
+    "dev": "nodemon --exec node index.js"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,7 @@
     }
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -50,6 +52,7 @@
     "pg": "^8.7.1",
     "sequelize": "^6.12.0-beta.3",
     "sqlite3": "^5.0.2",
+    "uuid": "^8.3.2",
     "yup": "^0.32.11"
   }
 }
