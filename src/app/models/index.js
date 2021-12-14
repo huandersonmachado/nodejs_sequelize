@@ -6,7 +6,6 @@ const Sequelize = require('sequelize');
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-
 const config = require(`${__dirname}/../../configs/database.js`)[env];
 const db = {};
 
@@ -18,12 +17,11 @@ fs.readdirSync(__dirname)
       file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
   )
   .forEach((file) => {
-    const Model = require(path.join(__dirname, file))(
+    const model = require(path.join(__dirname, file))(
       sequelize,
       Sequelize.DataTypes
     );
-    console.log(Model);
-    db[Model.name] = Model;
+    db[model.name] = model;
   });
 
 Object.keys(db).forEach((modelName) => {

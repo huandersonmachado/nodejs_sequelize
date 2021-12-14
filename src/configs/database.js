@@ -11,14 +11,16 @@ module.exports = {
     define: {
       timestamps: true,
       underscored: true,
+      underscoredAll: true,
     },
   },
   test: {
-    database: ':memory:',
+    storage: ':memory:',
     dialect: 'sqlite',
     define: {
       timestamps: true,
       underscored: true,
+      underscoredAll: true,
     },
   },
   production: {
@@ -30,6 +32,7 @@ module.exports = {
     define: {
       timestamps: true,
       underscored: true,
+      underscoredAll: true,
     },
   },
 };
