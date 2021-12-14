@@ -1,17 +1,34 @@
-const { Model } = require('sequelize');
+const { hashPassword, uuid } = require('../../utils');
 
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {}
-
-  return User.init(
-    {
-      name: DataTypes.STRING,
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
+  const userSchema = sequelize.define('User', {
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
     },
-    {
-      sequelize,
-      modelName: 'User',
-    }
-  );
+    name: {
+      type: DataTypes.STRING,
+    },
+    email: {
+      type: DataTypes.STRING,
+    },
+    password: {
+      type: DataTypes.STRING,
+    },
+  });
+
+  function generateUuid(user) {
+    user.id = uuid();
+  }
+
+  function generateHashedPassword(user) {
+    user.password = hashPassword(user.password);
+  }
+
+  userSchema.beforeCreate((user) => {
+    generateUuid(user);
+    generateHashedPassword(user);
+  });
+
+  return userSchema;
 };
