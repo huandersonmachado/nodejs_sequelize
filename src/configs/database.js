@@ -16,8 +16,13 @@ module.exports = {
     },
   },
   test: {
-    storage: ':memory:',
-    dialect: 'sqlite',
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: 'nodejs_sequelize_test',
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: 'postgres',
+    logging: false,
     define: {
       timestamps: true,
       underscored: true,
