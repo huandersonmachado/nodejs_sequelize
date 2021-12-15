@@ -14,8 +14,12 @@ describe('Test Users Module', () => {
         password: '123456',
       });
 
-    console.log(response.body);
+    const user = await User.findOne({
+      where: { email: 'huandersonmachado@gmail.com' },
+    });
 
+    expect(user.dataValues.name).toBe('Huanderson');
+    expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('message');
     expect(response.body).toHaveProperty('user');
   });
