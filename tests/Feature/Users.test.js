@@ -27,5 +27,6 @@ describe('Test Users Module', () => {
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('message');
     expect(response.body).toHaveProperty('user');
+    expect(response.body.user).not.toHaveProperty('password');
   });
 });

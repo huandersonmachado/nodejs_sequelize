@@ -13,7 +13,10 @@ class UsersController {
 
       return res.status(201).json({
         message: 'User created successfully',
-        user: userModel,
+        user: {
+          name: userModel.name,
+          email: userModel.email,
+        },
       });
     } catch (err) {
       return res.json({
