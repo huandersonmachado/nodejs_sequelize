@@ -14,6 +14,10 @@ module.exports = {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
       },
+      biography: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false,
+      },
       link_url: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
