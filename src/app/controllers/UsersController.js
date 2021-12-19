@@ -25,5 +25,36 @@ class UsersController {
       });
     }
   }
+
+  async login(req, res) {
+    try {
+      const { email, password } = req.body;
+
+      if (!email || !password) {
+        return res.json({
+          message: 'Email and password are required',
+        });
+      }
+
+      const userModel = await User.findOne({ where: { email } });
+
+      if (!userModel) {
+        return res.status(401).json({
+          message: 'User not found',
+        });
+      }
+
+      const data = await userModel.authorize(userModel);
+
+      return res.status(200).json({
+        message: 'User logged successfully',
+        data,
+      });
+    } catch (err) {
+      return res.json({
+        erro: err,
+      });
+    }
+  }
 }
 module.exports = new UsersController();

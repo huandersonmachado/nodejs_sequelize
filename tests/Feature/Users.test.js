@@ -29,4 +29,26 @@ describe('Test Users Module', () => {
     expect(response.body.data).toHaveProperty('user');
     expect(response.body.data.user).not.toHaveProperty('password');
   });
+
+  it('should login with a user', async () => {
+    const userFake = generateFakeUser();
+
+    const user = await User.create(userFake);
+
+    const response = await supertest(server)
+      .post('/users/login')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .send({
+        email: userFake.email,
+        password: userFake.password,
+      });
+
+    expect(response.status).toBe(200);
+    expect(user.dataValues.name).toBe(userFake.name);
+    expect(user.dataValues.email).toBe(userFake.email);
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.data).toHaveProperty('user');
+    expect(response.body.data.user).not.toHaveProperty('password');
+  });
 });
