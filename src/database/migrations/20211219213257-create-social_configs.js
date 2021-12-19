@@ -1,27 +1,28 @@
 module.exports = {
   up: async (queryInterface, Sequelize) =>
-    queryInterface.createTable('sites', {
+    queryInterface.createTable('social_configs', {
       id: {
         type: Sequelize.DataTypes.UUID,
         primaryKey: true,
         allowNull: false,
       },
-      site_name: {
+      display_name: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
       },
-      logo_url: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull: false,
-      },
-      link_url: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull: false,
-      },
-      user_id: {
+      site_id: {
         type: Sequelize.DataTypes.UUID,
         references: {
-          model: 'users',
+          model: 'sites',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      },
+      social_config_type_id: {
+        type: Sequelize.DataTypes.UUID,
+        references: {
+          model: 'social_configs_types',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -37,8 +38,5 @@ module.exports = {
       },
     }),
 
-  down: async (queryInterface) => {
-    queryInterface.removeIndex('sites', 'user_id');
-    queryInterface.dropTable('sites', 'user_id');
-  },
+  down: async (queryInterface) => queryInterface.dropTable('social_configs'),
 };
