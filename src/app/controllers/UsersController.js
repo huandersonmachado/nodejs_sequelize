@@ -11,11 +11,12 @@ class UsersController {
 
       const userModel = await User.create({ name, email, password });
 
+      const data = await userModel.authorize(userModel);
+
       return res.status(201).json({
         message: 'User created successfully',
-        user: {
-          name: userModel.name,
-          email: userModel.email,
+        data: {
+          ...data,
         },
       });
     } catch (err) {

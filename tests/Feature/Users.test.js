@@ -26,7 +26,7 @@ describe('Test Users Module', () => {
     expect(user.dataValues.name).toBe(userFake.name);
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('message');
-    expect(response.body).toHaveProperty('user');
-    expect(response.body.user).not.toHaveProperty('password');
+    expect(response.body.data).toHaveProperty('user');
+    expect(response.body.data.user).not.toHaveProperty('password');
   });
 });
