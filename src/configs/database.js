@@ -16,8 +16,9 @@ module.exports = {
     },
   },
   test: {
-    storage: ':memory:',
+    storage: ':memory',
     dialect: 'sqlite',
+    logging: false,
     define: {
       timestamps: true,
       underscored: true,
