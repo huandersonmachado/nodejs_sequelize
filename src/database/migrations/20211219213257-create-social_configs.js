@@ -38,5 +38,9 @@ module.exports = {
       },
     }),
 
-  down: async (queryInterface) => queryInterface.dropTable('social_configs'),
+  down: async (queryInterface) => {
+    queryInterface.removeIndex('social_configs', 'site_id');
+    queryInterface.removeIndex('social_configs', 'social_config_type_id');
+    queryInterface.dropTable('social_configs');
+  },
 };
